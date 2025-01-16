@@ -2,7 +2,7 @@ package com.example.adapters.out;
 
 import com.example.adapters.out.repository.mapper.CustomerEntityMapper;
 import com.example.adapters.out.repository.CustomerRepository;
-import com.example.adapters.out.repository.entities.CustomerEntity;
+import com.example.adapters.out.repository.entity.CustomerEntity;
 import com.example.application.core.domain.Customer;
 import com.example.application.ports.out.FindCustomerOutputPort;
 import org.springframework.stereotype.Component;

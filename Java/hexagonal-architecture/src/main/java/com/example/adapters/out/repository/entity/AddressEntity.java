@@ -1,4 +1,4 @@
-package com.example.adapters.out.repository.entities;
+package com.example.adapters.out.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -7,6 +7,7 @@ import com.example.application.core.domain.Customer;
 import com.example.application.ports.in.DeleteCustomerInputPort;
 import com.example.application.ports.in.FindCustomerInputPort;
 import com.example.application.ports.in.InsertCustomerInputPort;
+import com.example.application.ports.in.UpdateCustomerInputPort;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ public class CustomerController {
     private final InsertCustomerInputPort insertCustomerInputPort;
     private final FindCustomerInputPort customerInputPort;
     private final DeleteCustomerInputPort deleteCustomerInputPort;
+    private final UpdateCustomerInputPort updateCustomerInputPort;
     private final CustomerMapper customerMapper;
 
     @Autowired
@@ -27,11 +29,13 @@ public class CustomerController {
             InsertCustomerInputPort insertCustomerInputPort,
             FindCustomerInputPort customerInputPort,
             DeleteCustomerInputPort deleteCustomerInputPort,
+            UpdateCustomerInputPort updateCustomerInputPort,
             CustomerMapper customerMapper
     ) {
         this.insertCustomerInputPort = insertCustomerInputPort;
         this.customerInputPort = customerInputPort;
         this.deleteCustomerInputPort = deleteCustomerInputPort;
+        this.updateCustomerInputPort = updateCustomerInputPort;
         this.customerMapper = customerMapper;
     }
 
@@ -65,6 +69,16 @@ public class CustomerController {
     @DeleteMapping("/{customerId}")
     public ResponseEntity<Void> delete(@PathVariable int customerId) {
         this.deleteCustomerInputPort.delete(customerId);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable int id, @RequestBody CustomerRequest customerRequest) {
+        Customer customer = this.customerMapper.toCustomer(customerRequest);
+        customer.setId(id);
+
+        this.updateCustomerInputPort.update(customer, customerRequest.getZipCode());
 
         return ResponseEntity.ok().build();
     }

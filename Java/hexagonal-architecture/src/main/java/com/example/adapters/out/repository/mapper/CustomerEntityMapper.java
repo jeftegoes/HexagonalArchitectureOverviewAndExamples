@@ -1,6 +1,6 @@
 package com.example.adapters.out.repository.mapper;
 
-import com.example.adapters.out.repository.entities.CustomerEntity;
+import com.example.adapters.out.repository.entity.CustomerEntity;
 import com.example.application.core.domain.Customer;
 import org.mapstruct.Mapper;
 
