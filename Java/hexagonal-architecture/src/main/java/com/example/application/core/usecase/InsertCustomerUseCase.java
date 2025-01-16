@@ -2,23 +2,23 @@ package com.example.application.core.usecase;
 
 import com.example.application.core.domain.Address;
 import com.example.application.core.domain.Customer;
-import com.example.application.ports.in.CustomerInputPort;
-import com.example.application.ports.out.CustomerOutputPort;
+import com.example.application.ports.in.InsertCustomerInputPort;
+import com.example.application.ports.out.InsertCustomerOutputPort;
 import com.example.application.ports.out.FindAddressByZipCodeOutputPort;
 
-public class CustomerUseCase implements CustomerInputPort {
+public class InsertCustomerUseCase implements InsertCustomerInputPort {
     private final FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort;
-    private final CustomerOutputPort customerOutputPort;
+    private final InsertCustomerOutputPort insertCustomerOutputPort;
 
-    public CustomerUseCase(FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort, CustomerOutputPort customerOutputPort) {
+    public InsertCustomerUseCase(FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort, InsertCustomerOutputPort insertCustomerOutputPort) {
         this.findAddressByZipCodeOutputPort = findAddressByZipCodeOutputPort;
-        this.customerOutputPort = customerOutputPort;
+        this.insertCustomerOutputPort = insertCustomerOutputPort;
     }
 
     @Override
     public void insert(Customer customer, String zipCode) {
         Address address = this.findAddressByZipCodeOutputPort.find(zipCode);
         customer.setAddress(address);
-        this.customerOutputPort.insert(customer);
+        this.insertCustomerOutputPort.insert(customer);
     }
 }

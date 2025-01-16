@@ -1,11 +1,15 @@
 package com.example.adapters.out.repository.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @Entity
 @Table(name = "addresses")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class AddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,6 +2,6 @@ package com.example.application.ports.out;
 
 import com.example.application.core.domain.Customer;
 
-public interface CustomerOutputPort {
+public interface InsertCustomerOutputPort {
     void insert(Customer customer);
 }
