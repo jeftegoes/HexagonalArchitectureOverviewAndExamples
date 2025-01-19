@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
     private final InsertCustomerInputPort insertCustomerInputPort;
-    private final FindCustomerInputPort customerInputPort;
+    private final FindCustomerInputPort findCustomerInputPort;
     private final DeleteCustomerInputPort deleteCustomerInputPort;
     private final UpdateCustomerInputPort updateCustomerInputPort;
     private final CustomerMapper customerMapper;
@@ -27,13 +27,13 @@ public class CustomerController {
     @Autowired
     public CustomerController(
             InsertCustomerInputPort insertCustomerInputPort,
-            FindCustomerInputPort customerInputPort,
+            FindCustomerInputPort findCustomerInputPort,
             DeleteCustomerInputPort deleteCustomerInputPort,
             UpdateCustomerInputPort updateCustomerInputPort,
             CustomerMapper customerMapper
     ) {
         this.insertCustomerInputPort = insertCustomerInputPort;
-        this.customerInputPort = customerInputPort;
+        this.findCustomerInputPort = findCustomerInputPort;
         this.deleteCustomerInputPort = deleteCustomerInputPort;
         this.updateCustomerInputPort = updateCustomerInputPort;
         this.customerMapper = customerMapper;
@@ -50,7 +50,7 @@ public class CustomerController {
 
     @GetMapping("/{customerId}")
     public ResponseEntity<CustomerResponse> find(@PathVariable int customerId) {
-        Customer customer = this.customerInputPort.find(customerId);
+        Customer customer = this.findCustomerInputPort.find(customerId);
 
         CustomerResponse customerResponse = this.customerMapper.toCustomerResponse(customer);
 
@@ -59,7 +59,7 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<List<CustomerResponse>> findAll() {
-        List<Customer> customers = this.customerInputPort.findAll();
+        List<Customer> customers = this.findCustomerInputPort.findAll();
 
         List<CustomerResponse> customersResponse = this.customerMapper.toCustomersResponse(customers);
 
